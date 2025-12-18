@@ -1,0 +1,127 @@
+﻿@page "/productlist"
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Product_Exercise_Blazor.Dto
+@using Product_Exercise_Blazor.Service
+@inject IProductService _service
+@inject ProtectedSessionStorage SessionStorage
+@inject NavigationManager Navigation
+
+
+
+
+@* <div>
+    <label><strong>Filter by Category:</strong></label>
+    <select @bind="selectcategory">
+        <option value="">All Categories</option>
+        @foreach (var cat in categoryList)
+        {
+            <option value="@cat">@cat</option>
+        }
+    </select>
+    <button class="btn btn-primary " @onclick="FilterProducts">Filter</button>
+</div> *@
+
+
+
+
+<div>
+    <label><strong>Filter by Category:</strong></label>
+    <select @bind="selectcategory" @bind:after="FilterCategory">
+        <option value="">All Categories</option>
+        @foreach (var cat in categoryList)
+        {
+            <option value="@cat">@cat</option>
+        }
+    </select>
+</div>
+
+
+<div class="table-responsive">
+<table class="table table-bordered">
+    <thead>
+        <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Status</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+        @foreach(var product in productList)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Quantity</td>
+                    <td>@product.Price</td>
+                    <td>@product.Category</td>
+                    <td>
+                        @if (product.Quantity == 0)
+                        {
+                            <span style="color:red;">Out of Stock</span>
+                        }
+                        else
+                        {
+                            <span style="color:green;">In Stock</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+</table>
+
+
+
+    <NavLink class="btn btn-primary text-white" href="/addproduct">  ADD PRODUCT  </NavLink>
+    
+
+</div>
+
+
+@code {
+    private List<ProductDto> productList = new();
+    private int? userid;
+    private List<string> categoryList = new();
+    private string selectcategory = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        var idResult = await SessionStorage.GetAsync<int>("UserId");
+        userid = idResult.Success ? idResult.Value : null;
+
+        if(userid==null)
+        {
+            Navigation.NavigateTo("/login");
+        }
+
+
+        categoryList = await _service.GetCategoriesByUserId(userid.Value);
+
+        productList = await _service.GetProductByUserId(userid.Value);
+
+       
+    }
+
+
+
+    // private async Task FilterProducts()
+    // {
+    //     productList = await _service.GetProductByCategory(userid.Value,selectcategory);
+    // }
+
+
+
+
+    private async Task FilterCategory()
+    {
+        
+
+            productList = await _service.GetProductByCategory(userid.Value, selectcategory);
+    }
+
+
+
+}

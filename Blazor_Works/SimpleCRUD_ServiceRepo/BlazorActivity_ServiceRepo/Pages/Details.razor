@@ -1,0 +1,32 @@
+﻿@page "/Details/{Id}"
+@using BlazorActivity_ServiceRepo.Data.Models
+@using BlazorActivity_ServiceRepo.Data.Models.Interfaces
+@inject IBookServicecs bookService
+@inject NavigationManager navigationManager;
+
+<h3>Details of your book</h3>
+
+
+
+<form>
+    <label for="Id" class="control-label">Book Id:@booklist.BookId</label><br />
+    <label for="Title" class="control-label">Book Title:@booklist.Title</label><br />
+    <label for="Title" class="control-label">Book Author:@booklist.Author</label><br />
+   <NavLink class="nav-link" href="/">Back to Index</NavLink>
+    <br /><br />
+</form>
+
+
+@code {
+    [Parameter]
+    public string Id{ get; set; }
+
+    private Book booklist = new Book();
+
+    protected override void OnInitialized()
+    {
+        booklist = bookService.GetBookById(Convert.ToInt32(Id));
+    }
+
+    
+}

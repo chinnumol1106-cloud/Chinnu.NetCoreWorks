@@ -1,0 +1,32 @@
+﻿@page "/"
+@model Machine_Test.Pages.RegisterModel
+@{
+}
+<h3>REGISTER</h3>
+
+<form method="post">
+    <div>
+        <label>First Name</label>
+        <input asp-for="Registerdto.FName" />
+    </div>
+      <div>
+        <label>last Name</label>
+        <input asp-for="Registerdto.LName" />
+    </div>
+      <div>
+        <label>Email</label>
+        <input asp-for="Registerdto.Email" />
+    </div>
+    <div>
+        <label>Password</label>
+        <input asp-for="Registerdto.Password" type="password" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">REGISTER</button>
+</form>
+
+@if(!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p>@Model.ErrorMessage</p>
+}
+

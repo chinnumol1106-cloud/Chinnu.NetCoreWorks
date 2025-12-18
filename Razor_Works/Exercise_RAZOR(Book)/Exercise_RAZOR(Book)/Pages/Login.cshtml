@@ -1,0 +1,25 @@
+﻿@page
+@model Exercise_RAZOR_Book_.Pages.LoginModel
+@{
+}
+<h2>YOU CAN LOGIN HERE</h2>
+<hr />
+
+<form method="post">
+
+    <div>
+        <input asp-for="Email" placeholder="Email" />
+    </div>
+
+    <div>
+        <input asp-for="Password" placeholder="password" type="password" />
+    </div>
+
+    <div>
+        <button type="submit" class=" btn btn-primary">LOGIN</button>
+    </div>
+
+</form>
+
+
+@Model.ErrorMessage

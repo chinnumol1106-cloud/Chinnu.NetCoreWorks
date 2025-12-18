@@ -1,0 +1,28 @@
+﻿@page
+@model Machine_Test.Pages.LoginModel
+@{
+}
+
+<h3>LOGIN PAGE</h3>
+
+<form method="post">
+
+    <div>
+        <label>Email</label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div>
+        <label>password</label>
+        <input asp-for="Password"  type="password"/>
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <button type="submit">LOGIN</button>
+</form>
+
+@if(!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p>@Model.ErrorMessage</p>
+}

@@ -1,0 +1,113 @@
+﻿@page "/"
+@using Employee_Blazor_machineTest.Dto
+@using Employee_Blazor_machineTest.Services
+@inject IEmployeeService _service
+@inject NavigationManager NavigationManager
+
+<div class="container">
+ 
+    <h3>Employee List</h3>
+
+   <table class="table-bordered">
+       <thead>
+       <tr>
+           <th>Name</th>
+            <th>Designation</th>
+            <th>salary</th>
+            <th>Actions</th>
+       </tr>
+       </thead>
+       <tbody>
+           @foreach(var emp in Employeelist)
+            {
+                <tr>
+                    <td>@emp.Name</td>
+                    <td>@emp.Designation</td>
+                    <td>@emp.Salary</td>
+                    <td>
+                        <button type="submit" class="btn btn-success" @onclick="()=>Edit(emp)">Edit</button>|
+                        <button type="submit" class="btn btn-success" @onclick="() => Delete(emp.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+</table>
+
+
+<div class="card">
+    <div class="card-header">
+
+        <h4>@(employee.Id==0?"Create Employee":"Edit Employee")</h4>
+    </div>
+    <div class="card-body">
+        <EditForm Model="employee" OnValidSubmit="Save">
+            <DataAnnotationsValidator/>
+
+            <label>Name</label>
+            <InputText @bind-Value="employee.Name"/>
+                <label>Designation</label>
+                <InputText @bind-Value="employee.Designation" />
+                <label>Salary</label>
+                <InputNumber @bind-Value="employee.Salary" />
+
+                <button class="btn btn-primary">Save</button>
+
+               
+            
+
+        </EditForm>
+
+    </div>
+    
+</div>
+
+
+</div>
+
+@code
+{
+    private List<EmployeeDto> Employeelist = new();
+    private EmployeeDto employee = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Employeelist = await _service.GetEmployeebyIdAsync();
+    }
+
+    private async Task Save()
+    {
+        if(employee.Id==0)
+        {
+            await _service.AddEmployeeAsync(employee);
+        }
+        else
+        {
+            await  _service.UpdateEmployeeAsync(employee);
+
+        }
+        Employeelist = await _service.GetEmployeebyIdAsync();
+
+        employee = new EmployeeDto();
+
+
+    }
+
+    private void Edit(EmployeeDto emp)
+    {
+        employee.Id = emp.Id;
+        employee.Name = emp.Name;
+        employee.Designation = emp.Designation;
+        employee.Salary = emp.Salary;
+
+    }
+
+    private async Task Delete(int id)
+    {
+        await _service.DeleteEmployeeAsync(id);
+     
+        Employeelist = await _service.GetEmployeebyIdAsync();
+
+    }
+
+
+}

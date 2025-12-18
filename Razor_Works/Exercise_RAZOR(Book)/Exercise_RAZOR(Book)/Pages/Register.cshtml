@@ -1,0 +1,36 @@
+﻿@page "/"
+@model Exercise_RAZOR_Book_.Pages.RegisterModel
+@{
+ 
+    
+}
+<form method="post">  
+
+    <div>
+        <input asp-for="newuser.FirstName" placeholder="First Name" />
+    </div>
+
+
+    <div>
+        <input asp-for="newuser.LastName" placeholder="Last Name" />
+    </div>
+
+
+    <div>
+        <input asp-for="newuser.Email" placeholder="Email" />
+    </div>
+
+
+    <div>
+        <input asp-for="newuser.Password" placeholder="Password" type="password" />
+    </div>
+
+
+    <div>
+        <input asp-for="newuser.ConfirmPassword" placeholder="confirm password" type="password" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">REGISTER</button>
+</form>
+
+@Model.ErrorMessage

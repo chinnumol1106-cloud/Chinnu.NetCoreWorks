@@ -1,0 +1,15 @@
+﻿@page
+@model Exercise_RAZOR_Book_.Pages.ProfileModel
+@{
+}
+<h2>My Profile</h2>
+
+@if(Model.user!=null)
+{
+    <p>First Name:@Model.user.FirstName</p>
+    <p>Last Name:@Model.user.LastName</p>
+    <p>Email:@Model.user.Email</p>
+}
+
+<a asp-page="/Dashboard">GO TO BASHBOARD</a>
+<a asp-page="/Logout"> LOGOUT </a>

@@ -1,0 +1,81 @@
+﻿@page "/register"
+@using Blazor_JobProvider.Dto
+@using Blazor_JobProvider.Interface
+@inject IAuthService _service
+@inject NavigationManager Navigation
+
+<div class="continer justify-content-center align-items-center vh-100">
+    <div class="card" style="width:400px">
+        <div class="card-header bg-success text-white text-center">
+            <h3>Job Provider Registration</h3>
+        </div>
+
+        <div class="card-body">
+            <EditForm Model="InputJobProvider" OnValidSubmit="RegisterProvider">
+                <DataAnnotationsValidator/>
+
+                <div>
+                    <label>Name</label>
+                    <InputText @bind-Value="InputJobProvider.Name"/>
+                </div>
+                <div>
+                    <label>Email</label>
+                    <InputText @bind-Value="InputJobProvider.Email" />
+                </div>
+                <div>
+                    <label>Password</label>
+                    <InputText @bind-Value="password" Type="password" />
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-success">Register</button>
+                </div>
+
+            </EditForm>
+
+            @if(!string.IsNullOrEmpty(Message))
+            {
+                <div class="alert alert-danger text-center">@Message</div>
+            }
+
+            <div class="text-center">
+                <p>Already have an Account <a href="/login" >Login</a></p>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
+@code{
+    private JobProviderDto InputJobProvider = new();
+    private string password = "";
+    private string Message = "";
+
+
+    private async Task RegisterProvider()
+    {
+        var success = await _service.Registerr(InputJobProvider, password);
+
+        if(success)
+        {
+            Navigation.NavigateTo("/login");
+        }
+
+        else
+        {
+            Message = "Email already Exists";
+        }
+    }
+
+
+}
+
+
+
+
+
+

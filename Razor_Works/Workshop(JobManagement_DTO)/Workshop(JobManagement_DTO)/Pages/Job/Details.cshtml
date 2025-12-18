@@ -1,0 +1,25 @@
+﻿@page
+@model Workshop_JobManagement_DTO_.Pages.Job.DetailsModel
+@{
+}
+
+<h2>Job Post Details</h2>
+
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">Job Title</dt>
+    <dd class="col-sm-10">@Model.jobdetails.JobTitle</dd>
+
+    <dt class="col-sm-2">Company</dt>
+    <dd class="col-sm-10">@Model.jobdetails.Company</dd>
+
+    <dt class="col-sm-2">Location</dt>
+    <dd class="col-sm-10">@Model.jobdetails.Location</dd>
+
+    <dt class="col-sm-2">Employment Type</dt>
+    <dd class="col-sm-10">@Model.jobdetails.EmploymentType</dd>
+
+    <dt class="col-sm-2">Salary Range</dt>
+    <dd class="col-sm-10">@Model.jobdetails.SalaryRange</dd>
+</dl>
+

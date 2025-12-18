@@ -1,0 +1,55 @@
+﻿@page "/"
+@model Librarymanagement_RAZOR_CFA_.Pages.Books.IndexModel
+@{
+    ViewData["Title"] = "Book List";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<form method="get">
+    <div class="form-group">
+        <input type="text" name="search" class="form-control" placeholder="Search by Title" value="@Model.Search" />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Search</button>
+</form>
+
+<p>Total Books: @Model.TotalCount</p>
+
+
+<p>
+    <a asp-page="Create">Add New Book</a>
+</p>
+@if (Model.Bookslist != null && Model.Bookslist.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Author</th>
+                <th>Publish_Date</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var b in Model.Bookslist)
+            {
+                <tr>
+                    <td>@b.Title</td>
+                    <td>@b.Genre</td>
+                    <td>@b.Author</td>
+                    <td>@b.PublishDate</td>
+                    <td>
+                        <a asp-page="Edit" asp-route-id="@b.BookId">Edit</a>
+                        <a asp-page="Details" asp-route-id="@b.BookId">Details</a>
+                        <a asp-page="Delete" asp-route-id="@b.BookId">Delete</a>|
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No books found.</p>
+}

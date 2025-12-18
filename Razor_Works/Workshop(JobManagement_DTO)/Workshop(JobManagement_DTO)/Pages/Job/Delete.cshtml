@@ -1,0 +1,38 @@
+﻿@page
+@model Workshop_JobManagement_DTO_.Pages.Job.DeleteModel
+@{
+}
+
+<h2>Delete Job</h2>
+
+<div>
+    <h4>Job Details</h4>
+    <hr />
+
+    <dl>
+        <dt>Job Title</dt>
+        <dd>@Model.JobPost.JobTitle</dd>
+
+        <dt>Company</dt>
+        <dd>@Model.JobPost.Company</dd>
+
+        <dt>Location</dt>
+        <dd>@Model.JobPost.Location</dd>
+
+        <dt>Employment Type</dt>
+        <dd>@Model.JobPost.EmploymentType</dd>
+
+        <dt>Salary Range</dt>
+        <dd>@Model.JobPost.SalaryRange</dd>
+    </dl>
+
+
+<form  method="post">
+
+    <input type="hidden" asp-for="JobPost.Id" />
+    <button type="submit" class="btn btn-primary">Delete</button>
+    <a asp-page="Index" class="btn btn-primary">Cancel</a>
+
+</form>
+
+</div>

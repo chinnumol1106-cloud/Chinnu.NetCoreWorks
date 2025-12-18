@@ -1,0 +1,72 @@
+﻿@page "/login"
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Product_Exercise_Blazor.Service
+@inject IUserService _service
+@inject NavigationManager Navigation
+@inject ProtectedSessionStorage SessionStorage
+
+
+<div class="container justify-content-center align-items-center vh-100">
+
+    <div class="card" style="width: 400px;">
+        <div class="card-header bg-primary text-white text-center">
+            <h3>User Login</h3>
+        </div>
+
+        <div class="card-body">
+            <EditForm Model="loginModel" OnValidSubmit="Loginn">
+                <DataAnnotationsValidator />
+
+                <div class="mb-3">
+                    <label >Email:</label>
+                    <InputText  @bind-Value="loginModel.Email" />
+                </div>
+
+                <div class="mb-3">
+                    <label >Password:</label>
+                    <InputText @bind-Value="loginModel.Password" Type="password" />
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary ">
+                        Login
+                    </button>
+                </div>
+            </EditForm>
+
+            @if (!string.IsNullOrEmpty(Message))
+            {
+                <div class="alert alert-danger text-center">@Message</div>
+            }
+        </div>
+
+    </div>
+
+</div>
+
+@code {
+    private LoginModel loginModel = new();
+    private string Message = "";
+
+
+    private async Task Loginn()
+    {
+        var success = await _service.Login(loginModel.Email, loginModel.Password);
+        if (success)
+        {
+            Navigation.NavigateTo("/addproduct");
+        }
+        else
+        {
+            Message = "Invalid login credentials.";
+        }
+    }
+
+
+
+    private class LoginModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+}

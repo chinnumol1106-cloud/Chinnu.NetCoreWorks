@@ -1,0 +1,53 @@
+﻿@page
+@model Workshop_JobManagement_DTO_.Pages.Job.CreateModel
+@{
+}
+
+<h2>Create Job Post</h2>
+
+<form method="post">
+    <div>
+        <label>Job Title</label>
+        <input asp-for="JobPost.JobTitle" />
+        <span asp-validation-for="JobPost.JobTitle"></span>
+   </div>
+    <div>
+        <label>Company</label>
+        <input asp-for="JobPost.Company" />
+        <span asp-validation-for="JobPost.Company"></span>
+    </div>
+    <div>
+        <label>Location</label>
+        <input asp-for="JobPost.Location" />
+        <span asp-validation-for="JobPost.Location"></span>
+    </div>
+    <div>
+        <label>EmploymentType</label>
+       <select asp-for="JobPost.EmploymentType">
+           <option value="Full-Time">Full-Time</option>
+            <option value="Part-Time">part-Time</option>
+            <option value="Contract">Contract</option>
+       </select>
+        <span asp-validation-for="JobPost.EmploymentType"></span>
+    </div>
+    <div>
+        <label>JobDescription</label>
+       <textarea asp-for="JobPost.JobDescription"></textarea>
+        <span asp-validation-for="JobPost.JobDescription"></span>
+    </div>
+
+    <div>
+        <label>SalaryRange</label>
+        <textarea asp-for="JobPost.SalaryRange"></textarea>
+        <span asp-validation-for="JobPost.SalaryRange"></span>
+    </div>
+    <div>
+        <label>Requirements</label>
+        <textarea asp-for="JobPost.Requirements"></textarea>
+        <span asp-validation-for="JobPost.Requirements"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-page="Index" class="btn btn-primary">Cancel</a>
+</form>

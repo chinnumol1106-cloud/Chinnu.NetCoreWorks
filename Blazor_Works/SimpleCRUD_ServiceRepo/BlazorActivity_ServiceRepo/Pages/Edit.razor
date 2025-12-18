@@ -1,0 +1,41 @@
+﻿@page "/Edit/{id}"
+@using BlazorActivity_ServiceRepo.Data.Models
+@using BlazorActivity_ServiceRepo.Data.Models.Interfaces
+@inject IBookServicecs bookService
+
+@inject NavigationManager navigationManager
+
+<h3>Edit</h3>
+<hr/>
+
+<form @onsubmit="Update">
+    <div>
+        <label for=" Title" class="control-label">Title</label>
+        <input id="Title" class="form-control" @bind="book.Title" />
+    </div>
+
+    <div>
+        <label for=" Author" class="control-label">Author</label>
+        <input id="Author" class="form-control" @bind="book.Author" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Update</button>
+</form>
+
+@code {
+
+    [Parameter]
+    public string Id{ get; set; }
+    private Book book = new Book();
+
+    protected override void OnInitialized()
+    {
+        book = bookService.GetBookById(Convert.ToInt32(Id));
+    }
+
+    protected void Update()
+    {
+        bookService.UpdateBook(book);
+        navigationManager.NavigateTo("/");
+    }
+}

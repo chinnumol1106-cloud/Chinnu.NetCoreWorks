@@ -1,0 +1,45 @@
+﻿@page
+@model Workshop_JobManagement_DTO_.Pages.Job.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h2>Job Listing</h2>
+
+
+
+
+<a asp-page="Create" class="btn btn-primary">Create New Job</a>
+
+
+<table class="table-bordered">
+    <tr>
+       <th>Job Title</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Employment Type</th>
+        <th>Salary Range</th>
+        <th>Actions</th>
+    </tr>
+
+
+    @foreach(var job in Model.JobPosts)
+    {
+        <tr>
+            <td>@job.JobTitle</td>
+            <td>@job.Company</td>
+            <td>@job.Location</td>
+            <td>@job.EmploymentType</td>
+            <td>@job.SalaryRange</td>
+
+            <td>
+                <a asp-page="Edit" asp-route-id="@job.Id" class=" btn btn-warning" >Edit</a>
+                 <a asp-page="Details" asp-route-id="@job.Id" class=" btn btn-warning" >View</a>
+                <a asp-page="Delete" asp-route-id="@job.Id" class=" btn btn-warning">Delete</a>
+            </td>
+        </tr>
+    }
+
+   
+</table>

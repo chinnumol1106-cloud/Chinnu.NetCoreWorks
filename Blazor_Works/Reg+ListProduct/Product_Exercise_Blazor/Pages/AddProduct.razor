@@ -1,0 +1,96 @@
+﻿@page "/addproduct"
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Product_Exercise_Blazor.Dto
+@using Product_Exercise_Blazor.Service
+@inject ProtectedSessionStorage SessionStorage
+@inject NavigationManager Navigation
+
+@inject IProductService _service
+
+<div>
+    @if(!string.IsNullOrEmpty(username))
+    {
+        <div class="alert alert-success text-center">
+            <strong>WELCOME,@username!!!!!</strong>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger text-center">
+            <strong>You are not logged in.</strong>
+        </div>
+    }
+</div>
+
+
+<div class="card">
+    <div class="card-header bg-info text-white">
+
+        <h3>ADD PRODUCT</h3>
+
+    </div>
+
+    <div class="card-body">
+        <form @onsubmit="Addproduct">
+            <div>
+                <label>Name</label>
+                <input id=" Name" @bind="product.Name"/>
+            </div>
+            <div>
+                <label>Quantity</label>
+                <input id=" Quantity" @bind="product.Quantity" />
+            </div>
+            <div>
+                <label>Price</label>
+                <input id=" Price" @bind="product.Price" />
+            </div>
+            <div>
+                <label>Category</label>
+                <input id=" Category" @bind="product.Category" />
+            </div>
+            <div>
+                <button class="btn btn-primary" type="submit">ADD PRODUCT</button>
+
+                <NavLink class="btn btn-primary text-white" href="/productlist">  Go to Product List  </NavLink>
+            </div>
+          
+            
+
+        </form>
+
+    </div>
+
+</div>
+
+@code {
+    private ProductDto product = new();
+    private int? userid;
+    private string username;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var nameResult = await SessionStorage.GetAsync<string>("UserName");
+        var idResult = await SessionStorage.GetAsync<int>("UserId");
+
+        username = nameResult.Success ? nameResult.Value : null;
+        userid = idResult.Success ? idResult.Value : null;
+
+        if(username==null||userid==null)
+        {
+            Navigation.NavigateTo("/login");
+            return;
+        }
+        return;
+
+    }
+
+
+    private void Addproduct()
+    {
+        _service.AddProduct(product, userid.Value);
+        product = new();
+
+        
+
+    }
+}

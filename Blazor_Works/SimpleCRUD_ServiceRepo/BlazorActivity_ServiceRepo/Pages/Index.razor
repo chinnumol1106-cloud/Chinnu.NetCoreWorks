@@ -1,0 +1,55 @@
+﻿@page "/"
+@using BlazorActivity_ServiceRepo.Data.Models
+@using BlazorActivity_ServiceRepo.Data.Models.Interfaces
+@inject IBookServicecs bookService
+
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <NavLink class="nav-link" href="/Create">Add Book</NavLink>
+</p>
+
+<table class="table"> 
+<thead>
+    <th>Title</th>
+    <th>Author</th>
+</thead>
+
+<tbody>
+    @foreach(var item in BookList)
+        {
+            var editUrl = $"/Edit/{(item?.BookId ?? 0)}";
+            var deleteUrl = $"/Delete/{(item?.BookId ?? 0)}";
+            var viewUrl = $"/Details/{(item?.BookId ?? 0)}";
+
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Author</td>
+
+                <td style="display:inline-flex; gap:10px">
+                    <NavLink class="nav-link" href="@editUrl">Edit</NavLink>
+                    <NavLink class="nav-link" href="@deleteUrl">Delete</NavLink>
+                    <NavLink class="nav-link" href="@viewUrl">Details</NavLink>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+@code
+{
+
+    List<Book> BookList = new List<Book>();
+
+    protected override void OnInitialized()
+    {
+        BookList = bookService.GetAllBooks();
+    }
+
+}

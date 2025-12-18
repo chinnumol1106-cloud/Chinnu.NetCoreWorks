@@ -1,0 +1,16 @@
+﻿@page
+@model Machine_Test.Pages.HomeModel
+@{
+}
+<h3>@Model.Welcome</h3>
+
+@if(Model.IsLoggedIn)
+{
+    <a asp-page="Logout">LOGOUT</a>
+
+}
+else
+{
+    <a asp-page="Register">REGISTER</a>
+    <a asp-page="Login">LOGIN</a>
+}
