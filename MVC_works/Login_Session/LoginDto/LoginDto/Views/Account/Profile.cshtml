@@ -1,0 +1,11 @@
+﻿@model LoginDto.DTOs.UserDTO
+
+<h2>PROFILE</h2>
+<hr />
+
+<label>UserName:@Model.username</label><br />
+<label>Password:@Model.Password</label><br />
+
+<a asp-action="EditProfile" asp-route-id="@Model.Id">Edit Profile</a>
+
+<a href="/Account/Logout">LOGOUT</a>

@@ -1,0 +1,19 @@
+﻿@model MVC_Exercise.Models.DTOs.MemberDto
+
+<h2>Remove Member</h2>
+<hr />
+
+<form asp-action="RemoveMember" method="post">
+
+    <input asp-for="CompanyId" placeholder="Companyid" />
+    <input asp-for="FirstName" placeholder="firstname" />
+    <input asp-for="Designation" placeholder="Designation" />
+
+    <div>
+        <button type="submit" class="btn btn-primary">Remove</button>
+    </div>
+
+
+</form>
+
+<a href="@Url.Action("Dashboard","Company")">Back To Dashboard</a>

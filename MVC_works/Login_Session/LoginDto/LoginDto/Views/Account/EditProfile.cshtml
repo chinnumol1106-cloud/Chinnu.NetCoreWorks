@@ -1,0 +1,14 @@
+﻿@model LoginDto.DTOs.UserDTO
+
+<h3>Edit Profile</h3>
+
+<form asp-action="EditProfile" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <label>UserName:</label>
+    <input asp-for="username" value="@Model.username" /> <br />
+    <label>Password</label>
+    <input asp-for="Password"  value="@Model.Password"/><br />
+
+    <button type="submit">Update</button>
+</form>

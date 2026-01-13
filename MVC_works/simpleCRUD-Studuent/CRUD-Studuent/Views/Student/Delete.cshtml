@@ -1,0 +1,12 @@
+﻿@model CRUD_Studuent.Models.Student
+
+<h2>Delete Student</h2>
+<p>Are you want to delete @Model.Name?</p>
+
+<form asp-action="DeleteConfirmed" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit">Delete</button>
+
+</form>

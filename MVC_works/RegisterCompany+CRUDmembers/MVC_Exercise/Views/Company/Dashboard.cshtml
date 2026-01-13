@@ -1,0 +1,55 @@
+﻿@model MVC_Exercise.Models.DTOs.CompanyDto
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+
+
+@if (ViewBag.WelcomeMessage != null)
+{
+    <h2>Welcome @ViewBag.WelcomeMessage</h2>
+}
+<hr />
+
+<form asp-action="Register" method="post">
+    <div>
+        <label>Company Name:@Model.CompanyName</label>
+      
+
+    </div>
+    <div>
+        <label>Email:@Model.Email</label>
+       
+
+    </div>
+    <div>
+        <label>Website:@Model.Password</label>
+        
+
+    </div>
+    <div>
+        <label>Phone:@Model.Phone</label>
+
+
+    </div>
+    <div>
+        <label>About: @Model.About </label>
+     
+
+    </div>
+    <div>
+        <label>Vision: @Model.Vision</label>
+     
+
+    </div>
+    <div>
+        <label>Mission: @Model.Mission</label>
+       
+
+    </div>
+  
+
+</form>
+ <a href="@Url.Action("UserRegister","User")">Add Member</a>
+ <a href="@Url.Action("RemoveMember","User")">Remove Member</a>
+<a href="@Url.Action("ListMember", "User")">List Member</a>

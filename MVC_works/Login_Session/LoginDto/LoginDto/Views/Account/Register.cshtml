@@ -1,0 +1,17 @@
+﻿@model LoginDto.DTOs.UserDTO
+
+<h3>Register</h3>
+
+<form asp-action="Register" method="post">
+
+    <label>UserName:</label>
+    <input asp-for="username"/> <br/>
+    <label>Password</label>
+    <input asp-for="Password" type="password"/><br/>
+
+    <button type="submit">Register</button>
+</form>
+
+<p>@ViewBag.Message</p>
+
+<p>If already you have an account please login <a href="/Account/Login">Go To Login</a></p>

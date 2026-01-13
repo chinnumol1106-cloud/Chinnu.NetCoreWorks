@@ -1,0 +1,65 @@
+﻿@model MVC_Exercise.Models.DTOs.CompanyDto
+@{
+    ViewData["Title"] = "CompanyRegistration";
+}
+<h1>Company Registration</h1>
+<hr />
+
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+
+<form asp-action="Register" method="post">
+    <div>
+        <label>Company Name</label>
+        <input asp-for="CompanyName" />
+
+    </div>
+    <div>
+        <label>Email</label>
+        <input asp-for="Email" />
+
+    </div>
+    <div>
+        <label>Password</label>
+        <input asp-for="Password" />
+
+    </div>
+    <div>
+        <label>Website</label>
+        <input asp-for="Website" />
+
+    </div>
+    <div>
+        <label>Phone</label>
+        <input asp-for="Phone" />
+
+    </div>
+    <div>
+        <label>About</label>
+        <input asp-for="About" />
+
+    </div>
+    <div>
+        <label>Vision</label>
+        <input asp-for="Vision" />
+
+    </div>
+    <div>
+        <label>Mission</label>
+        <input asp-for="Mission" />
+
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">
+         REGISTER
+        </button>
+    </div>
+
+</form>
+<p>If you already have an account <a asp-action="Login">Login Here</a></p>

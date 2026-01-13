@@ -1,0 +1,32 @@
+﻿@model List<MVC_Exercise.Models.DTOs.MemberDto>
+
+<form method="get" asp-action="ListMember">
+    <input type="text" name="search" placeholder="Find member by name" />
+    <button type="submit">Search</button>
+</form>
+
+    <table class="table-bordered">
+        <thead>
+            <tr>
+                <th>MemberId</th>
+            <th>FirstName</th>
+            <th>Designation</th>
+            <th>Phone</th>
+            <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach(var member in Model)
+        {
+            <tr>
+                <td>@member.MemberId</td>
+                <td>@member.FirstName</td>
+                <td>@member.Designation</td>
+                <td>@member.Phone</td>
+                <td>@member.Email</td>
+                <td><a href="/User/ViewMember/@member.MemberId">View</a></td>
+            </tr>
+        }
+    </tbody>
+    </table>
+
