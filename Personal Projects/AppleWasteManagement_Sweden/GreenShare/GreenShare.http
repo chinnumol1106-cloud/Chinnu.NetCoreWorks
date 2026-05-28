@@ -1,6 +1,0 @@
-@GreenShare_HostAddress = http://localhost:5173
-
-GET {{GreenShare_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
